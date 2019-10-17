@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import CSVReader from 'react-csv-reader';
+import '../reset.css';
+import './Home.css';
 
 const Home = () => {
 
@@ -22,13 +24,14 @@ const Home = () => {
 
         
         //Magnitud A;
-        var MA =  Math.pow( personaUno[2],2 ) + Math.pow( personaDos[3],2 ) + Math.pow( personaDos[4],2 );                  //Elevo a potencias cuadradas cada uno de los items y las sumo
+        var MA =  Math.pow( personaUno[2],2 ) + Math.pow( personaUno[3],2 ) + Math.pow( personaUno[4],2 );                  //Elevo a potencias cuadradas cada uno de los items y las sumo
         MA = Math.sqrt(MA);                                                                                                 //Saco la raíz cuadrada de las sumas de las potencias
     
         //Magnitud B;
         var MB = Math.sqrt( Math.pow( personaDos[2],2 ) + Math.pow( personaDos[3],2 ) + Math.pow( personaDos[4],2 ) );      //Saco la raíz cuadrada de las sumas de las potencias
     
         var cos = AB / (MA * MB);                                                                                           //Saco el coseno de la magnitud MA y MB
+        cos = cos*100;
         console.log(cos);
         setCoseno(cos);                                                                                                     //Guardo la resultado en una variable global
     }
@@ -54,9 +57,11 @@ const Home = () => {
                 onFileLoaded={uploadDate}                                                   //Método que se ejecuta y me almacena la información
             />
 
+            <section className="Personas">
+
             {
                 uploadedData === true ?                                                                                                
-                <>                                                                                                                      
+                <div className="PersonaUno">                                                                                                                     
                 <p>Seleccionar el nombre de la persona 1</p>
                     <select defaultValue="" name="PersonaUno" required onChange={ (name) => { getPersona(name.target.value, 1)}}>
                         <option defaultValue="." value="." selected> Seleccionar</option>
@@ -70,13 +75,13 @@ const Home = () => {
                         }
                         
                     </select>
-                </>
+                </div>
                 : 
                 ""
             }
             {
                 uploadedData === true ? 
-                <>
+                <div className="PersonaDos">
                 
                 <p>Seleccionar el nombre de la persona 2</p>
                     <select defaultValue="" name="personaDos" required onChange={ (name) => { getPersona(name.target.value, 2)}}>
@@ -89,12 +94,15 @@ const Home = () => {
                             })
                         }
                     </select>
-                </>
+                </div>
                 : 
                 ""
             }
 
-            { coseno !== NaN ? <p>El valor es: {coseno}</p> : ""}
+            </section>
+            <div className="Resultado">
+                { uploadedData === true ? <><p>El valor es del </p><p>{uploadedData === true ? coseno : ''}</p><p>{uploadedData === true ? coseno.toFixed(2) : ''} % </p></> : ""}
+            </div>
         </section>
     )
 
