@@ -39,6 +39,14 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 20px;
+  -webkit-animation-name: appear;
+          animation-name: appear;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: cubic-bezier();
+          animation-timing-function: cubic-bezier();
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
 }
 
 .Home .react-csv-input label {
@@ -114,5 +122,23 @@
 .Home .Resultado p:last-child {
   font-weight: bolder;
   text-transform: uppercase;
+}
+
+@-webkit-keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=Home.css.map */
